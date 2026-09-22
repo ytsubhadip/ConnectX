@@ -1,0 +1,121 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(115deg, #9bdfb4 0%, #56c7a9 52%, #41bca9 100%);
+    color: #52616b;
+    font-family: Arial, sans-serif;
+}
+
+.loginDiv {
+    width: min(86%, 498px);
+    min-height: 500px;
+    margin: 23px auto;
+    padding: 64px 54px 42px;
+    border: 0;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 15px 30px rgba(33, 118, 95, 0.16);
+    box-sizing: border-box;
+}
+
+.loginDiv h1 {
+    margin: 0 0 50px;
+    text-align: center;
+    color: #078b8a;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: capitalize;
+}
+
+#LoginForm {
+    display: grid;
+    gap: 0;
+}
+
+#LoginForm input {
+    width: 100%;
+    height: 70px;
+    margin-bottom: 30px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border: 2px solid #e0e0e0;
+    border-radius: 0;
+    outline: none;
+    background: #ffffff;
+    color: #52616b;
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#LoginForm input::placeholder {
+    color: #687680;
+}
+
+#LoginForm input:focus {
+    border-color: #0b9990;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(11, 153, 144, 0.12);
+}
+
+#LoginForm button {
+    justify-self: center;
+    min-width: 116px;
+    padding: 14px 27px;
+    border: 0;
+    border-radius: 6px;
+    background: #078d83;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+#LoginForm button:hover {
+    background: #05736c;
+    box-shadow: 0 7px 16px rgba(7, 141, 131, 0.24);
+    transform: translateY(-1px);
+}
+
+#LoginForm button:active {
+    transform: translateY(0);
+}
+
+.CreateAccountLink {
+    margin: 24px 0 0;
+    color: #53616b;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.CreateAccountLink a {
+    color: #078b8a;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.CreateAccountLink a:hover {
+    color: #05736c;
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .loginDiv {
+        width: calc(100% - 30px);
+        min-height: auto;
+        margin: 15px auto;
+        padding: 45px 25px 35px;
+    }
+
+    .loginDiv h1 {
+        margin-bottom: 38px;
+    }
+
+    #LoginForm input {
+        height: 62px;
+        margin-bottom: 30px;
+    }
+}
