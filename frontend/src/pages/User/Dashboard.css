@@ -1,0 +1,9 @@
+
+.main {
+    padding-top: 70px; /* Match your navbar height */
+}
+
+.main h1 {
+    margin: 0;
+    padding: 20px;
+}

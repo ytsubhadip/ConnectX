@@ -5,6 +5,8 @@ import Dashboard from './pages/User/Dashboard';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 
+import ProtactRoute from './components/protactRoute';
+
 
 function App(){
     return(
@@ -26,7 +28,13 @@ function App(){
               <Register/>
               </>
               }/>
-            <Route path='/dashboard' element={ <Dashboard/>}/>
+            <Route path='/dashboard' element={
+              <ProtactRoute>
+                 <Dashboard/>
+              </ProtactRoute>
+             
+              
+              }/>
 
         </Routes>
         
