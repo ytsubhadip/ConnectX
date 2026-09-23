@@ -7,7 +7,6 @@ import Home from './pages/Home/Home';
 
 import ProtactRoute from './components/protactRoute';
 
-
 function App(){
     return(
       
