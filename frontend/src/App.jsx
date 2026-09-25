@@ -4,6 +4,7 @@ import Register from './pages/Auth/Register';
 import Dashboard from './pages/User/Dashboard';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
+import Profile from './pages/Profile/Profile';
 
 import ProtactRoute from './components/protactRoute';
 
@@ -17,13 +18,13 @@ function App(){
 
             <Route path='/login' element={
               <>
-              <Navbar/>
+            
               <Login/>
               </>
               }/>
             <Route path='/register' element={ 
               <>
-              <Navbar/>
+              
               <Register/>
               </>
               }/>
@@ -34,6 +35,16 @@ function App(){
              
               
               }/>
+
+              <Route
+                path='/profile'
+                element={
+                  <ProtactRoute>
+                    <Navbar/>
+                     <Profile />
+                  </ProtactRoute>
+                }
+              />
 
         </Routes>
         

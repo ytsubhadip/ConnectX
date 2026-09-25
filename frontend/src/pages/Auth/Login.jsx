@@ -57,14 +57,7 @@ function Login() {
 
       <div className="auth-card">
         {/* Brand Icon */}
-        <div className="auth-brand-badge">
-          <svg className="auth-sparkle" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <circle cx="12" cy="4" r="2.8" />
-            <circle cx="12" cy="20" r="2.8" />
-            <circle cx="4" cy="12" r="2.8" />
-            <circle cx="20" cy="12" r="2.8" />
-          </svg>
-        </div>
+        
 
         <h1 className="auth-title">Welcome back</h1>
         <p className="auth-subtitle">Sign in to your ConnectX AI workspace</p>

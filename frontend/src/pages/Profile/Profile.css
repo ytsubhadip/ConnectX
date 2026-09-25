@@ -1,0 +1,358 @@
+/* Modern Glassmorphic Dark Profile Page */
+
+.profile-page {
+  min-height: 100vh;
+  background-color: #050608;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ambient Radial Glows */
+.profile-page::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 650px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 75%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.profile-page::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  right: 15%;
+  width: 550px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Loading State */
+.profile-page > h2 {
+  position: relative;
+  z-index: 10;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 2.25rem;
+  background: rgba(14, 15, 22, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  animation: pulseLoading 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseLoading {
+  0% {
+    opacity: 0.65;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Main Profile Glass Card */
+.profile-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 540px;
+  background: rgba(14, 15, 22, 0.85);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2.75rem 2.25rem;
+  box-shadow: 0 25px 65px -15px rgba(0, 0, 0, 0.9),
+              0 0 35px -10px rgba(99, 102, 241, 0.22),
+              inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  box-sizing: border-box;
+  animation: profileFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes profileFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+/* Avatar Image (Letter Circle) */
+.profile-image {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  border: 3px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 28px rgba(99, 102, 241, 0.45),
+              inset 0 2px 4px rgba(255, 255, 255, 0.35);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 38px rgba(99, 102, 241, 0.65),
+              inset 0 2px 4px rgba(255, 255, 255, 0.45);
+}
+
+.profile-header h1 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+
+.profile-header p {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  letter-spacing: 0.01em;
+}
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-section > h1 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #818cf8;
+  margin: 0 0 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-section > h1::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 8px #6366f1;
+}
+
+/* Profile Information Rows */
+.profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.95rem 1.15rem;
+  margin-bottom: 0.65rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.profile-row:hover {
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateX(3px);
+}
+
+.profile-row span {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.profile-row strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
+}
+
+/* Role Badge effect on row with role */
+.profile-row:last-of-type strong {
+  text-transform: capitalize;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #c7d2fe;
+  padding: 0.22rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+/* Wallet Sub-Section */
+.profile-section .profile-section {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile-section .profile-section h2 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-section .profile-section h2::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+/* Wallet Box */
+.wallet-box {
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 16px;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.15rem;
+  transition: all 0.25s ease;
+}
+
+.wallet-box:hover {
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 12px 30px -5px rgba(99, 102, 241, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.wallet-box span {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.wallet-box strong {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+  letter-spacing: -0.02em;
+}
+
+/* Wallet History Link / Button */
+.profile-section a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profile-section a:hover {
+  background: #5544f5;
+  border-color: #6353f8;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(85, 68, 245, 0.45),
+              0 4px 12px rgba(85, 68, 245, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 580px) {
+  .profile-page {
+    padding: 4.5rem 1rem 3rem;
+  }
+
+  .profile-card {
+    padding: 2rem 1.25rem;
+    border-radius: 18px;
+  }
+
+  .profile-image {
+    width: 74px;
+    height: 74px;
+    font-size: 1.9rem;
+  }
+
+  .profile-header h1 {
+    font-size: 1.45rem;
+  }
+
+  .wallet-box {
+    padding: 1rem 1.15rem;
+  }
+
+  .wallet-box strong {
+    font-size: 1.15rem;
+  }
+}
