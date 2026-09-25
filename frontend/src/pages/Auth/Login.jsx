@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
+import API from '../../service/API';
 
 function Login() {
   const navigate = useNavigate();
@@ -21,8 +22,8 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        'http://localhost:8000/api/auth/login',
+      const response = await API.post(
+        '/api/auth/login',
         {
           email: email,
           password: password
@@ -40,7 +41,7 @@ function Login() {
       if (err.response && err.response.data && err.response.data.detail) {
         setError(err.response.data.detail);
       } else if (err.code === 'ERR_NETWORK') {
-        setError('Cannot connect to the server (http://localhost:8000). Please ensure backend is running.');
+        setError('Cannot connect to the server. Please ensure backend is running.');
       } else {
         setError('Invalid email or password. Please try again.');
       }

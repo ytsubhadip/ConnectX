@@ -26,8 +26,8 @@ function Profile(){
 
     const getWallet = async ()=>{
         try{
-            const response = await axios.get(
-                "http://localhost:8000/api/subscription/wallet",{
+            const response = await API.get(
+                "/api/subscription/wallet",{
                     params:{
                         user_id:user.user.id
                     }
