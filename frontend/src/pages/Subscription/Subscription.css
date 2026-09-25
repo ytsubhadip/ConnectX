@@ -1,0 +1,361 @@
+/* Modern Glassmorphic Dark Subscription Page */
+
+.subscription-page {
+  min-height: 100vh;
+  background-color: #050608;
+  color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  padding: 6.5rem 1.5rem 5rem;
+  position: relative;
+  overflow-x: clip;
+  overflow-y: visible;
+  box-sizing: border-box;
+}
+
+/* Ambient Radial Glows */
+.subscription-page::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 750px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 75%);
+  filter: blur(110px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.subscription-page::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  right: 15%;
+  width: 600px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Loading State */
+.subscription-page > h2 {
+  position: relative;
+  z-index: 10;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 2.5rem;
+  background: rgba(14, 15, 22, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  animation: pulseLoading 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseLoading {
+  0% {
+    opacity: 0.65;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Main Container */
+.subscription-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* Header */
+.subscription-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  max-width: 620px;
+}
+
+.subscription-header h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin: 0 0 0.85rem;
+  line-height: 1.2;
+  background: linear-gradient(180deg, #ffffff 40%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subscription-header p {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Feedback Alerts */
+.subscription-error {
+  width: 100%;
+  max-width: 580px;
+  padding: 0.85rem 1.4rem;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 2.25rem;
+  box-shadow: 0 4px 20px -5px rgba(239, 68, 68, 0.25);
+  animation: fadeInDown 0.3s ease;
+}
+
+.subscription-success {
+  width: 100%;
+  max-width: 580px;
+  padding: 0.85rem 1.4rem;
+  border-radius: 12px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 2.25rem;
+  box-shadow: 0 4px 20px -5px rgba(16, 185, 129, 0.25);
+  animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Plans Container Grid / Flex */
+.plans-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.plans-container > p {
+  color: #64748b;
+  font-size: 1rem;
+  text-align: center;
+  margin: 3rem 0;
+}
+
+/* Plan Card */
+.plan-card {
+  position: relative;
+  flex: 1 1 300px;
+  max-width: 360px;
+  min-width: 280px;
+  background: rgba(14, 15, 22, 0.82);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-sizing: border-box;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+  overflow: hidden;
+}
+
+/* Subtle top line gradient on cards */
+.plan-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.6), transparent);
+  transition: opacity 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(129, 140, 248, 0.45);
+  box-shadow: 0 30px 65px -15px rgba(0, 0, 0, 0.9),
+              0 0 35px -10px rgba(99, 102, 241, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.plan-card:hover::before {
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, transparent, #818cf8, transparent);
+}
+
+/* Featured / Accent card */
+.plan-card:nth-child(2) {
+  background: rgba(17, 18, 28, 0.88);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 22px 55px -10px rgba(0, 0, 0, 0.85),
+              0 0 30px -10px rgba(99, 102, 241, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Plan Title */
+.plan-card h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+}
+
+/* Price Container */
+.plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-bottom: 0.95rem;
+}
+
+.plan-price span {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* Credits Badge */
+.plan-credits {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(99, 102, 241, 0.14);
+  border: 1px solid rgba(99, 102, 241, 0.32);
+  color: #e0e7ff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.2);
+}
+
+.plan-credits span {
+  color: #a5b4fc;
+  font-weight: 500;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Plan Description */
+.plan-description {
+  font-size: 0.92rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0 0 2.25rem;
+  flex-grow: 1;
+  min-height: 50px;
+}
+
+/* Subscribe Button */
+.subscribe-btn {
+  width: 100%;
+  height: 48px;
+  background: #5544f5;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 22px rgba(85, 68, 245, 0.45),
+              0 4px 12px rgba(85, 68, 245, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.subscribe-btn:hover:not(:disabled) {
+  background: #6353f8;
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(99, 83, 248, 0.7),
+              0 6px 16px rgba(99, 83, 248, 0.35);
+}
+
+.subscribe-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.subscribe-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .subscription-page {
+    padding: 5rem 1rem 3.5rem;
+  }
+
+  .subscription-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .subscription-header h1 {
+    font-size: 2.15rem;
+  }
+
+  .subscription-header p {
+    font-size: 0.95rem;
+  }
+
+  .plan-card {
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .plan-price {
+    font-size: 2.35rem;
+  }
+}
