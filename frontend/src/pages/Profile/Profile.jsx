@@ -104,6 +104,13 @@ function Profile(){
                             Wallet
                         </h2>
 
+                        <Link to="/subscription">
+                         <button className='addCreditsBtn'>
+                        Add Credits
+                        </button>
+                        </Link>
+                       
+
                         <div className="wallet-box">
                             <span>
                                 Current Ballance

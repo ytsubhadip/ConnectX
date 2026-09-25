@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import API from "../../service/API";
 import "./Subscription.css";
 
 function Subscription() {
+
+    const navigate = useNavigate();
 
     const [plans, setPlans] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -90,6 +93,10 @@ function Subscription() {
             setSuccess(
                 `Subscription successful! ${response.data.credits_add} credits added to your wallet.`
             );
+
+            setTimeout(() => {
+                navigate("/profile");
+            }, 1000);
 
 
         } catch (error) {

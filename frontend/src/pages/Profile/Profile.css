@@ -301,8 +301,69 @@
   letter-spacing: -0.02em;
 }
 
-/* Wallet History Link / Button */
-.profile-section a {
+/* Add Credits Button (Subscription) */
+.profile-section a:has(.addCreditsBtn),
+.profile-section a:not(:last-child) {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.profile-section a:has(.addCreditsBtn):hover,
+.profile-section a:not(:last-child):hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.addCreditsBtn {
+  width: 100%;
+  height: 46px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4),
+              0 4px 12px rgba(99, 102, 241, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.addCreditsBtn::before {
+  content: '+';
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.addCreditsBtn:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(99, 102, 241, 0.6),
+              0 6px 16px rgba(99, 102, 241, 0.35);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.addCreditsBtn:active {
+  transform: translateY(0);
+}
+
+/* Wallet History Link / Button (Secondary Action) */
+.profile-section a:last-child {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -319,7 +380,7 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.profile-section a:hover {
+.profile-section a:last-child:hover {
   background: #5544f5;
   border-color: #6353f8;
   color: #ffffff;
