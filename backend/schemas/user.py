@@ -3,9 +3,18 @@ from pydantic import BaseModel, EmailStr
 
 class RegisterRequest(BaseModel):
     name: str
-    email: str
+    email: EmailStr
     password: str
 
 class LoginRequest(BaseModel):
-    email: str
+    email: EmailStr
+    password: str
+
+class AdminRegister(BaseModel):
+    name: str
+    email: EmailStr
+    password : str
+
+class AdminLogin(BaseModel):
+    email: EmailStr
     password: str
