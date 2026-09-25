@@ -29,7 +29,7 @@ function Profile(){
             const response = await axios.get(
                 "http://localhost:8000/api/subscription/wallet",{
                     params:{
-                        user_id:user.id
+                        user_id:user.user.id
                     }
                 }
             );
@@ -37,6 +37,8 @@ function Profile(){
             setBalance(
                 response.data.wallet_ballance
             )
+
+            console.log(response)
 
         }
         catch(error){

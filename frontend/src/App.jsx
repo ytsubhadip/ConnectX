@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
 
-import ProtactRoute from './components/protactRoute';
+import ProtactRoute from './components/ProtectRoute/ProtactRoute';
 
 function App(){
     return(
