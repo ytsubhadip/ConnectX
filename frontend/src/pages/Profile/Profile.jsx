@@ -106,7 +106,7 @@ function Profile(){
 
                         <Link to="/subscription">
                          <button className='addCreditsBtn'>
-                        Add Credits
+                        Buy Credits
                         </button>
                         </Link>
                        
