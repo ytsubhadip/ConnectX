@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
 import Subscription from './pages/Subscription/Subscription';
 import Wallet from './pages/Wallet/Wallet';
+import Document from './pages/Document/Documnet';
 
 import ProtactRoute from './components/ProtectRoute/ProtactRoute';
 
@@ -20,13 +21,11 @@ function App() {
 
         <Route path='/login' element={
           <>
-
             <Login />
           </>
         } />
         <Route path='/register' element={
           <>
-
             <Register />
           </>
         } />
@@ -63,6 +62,15 @@ function App() {
             <ProtactRoute>
               <Navbar />
               <Wallet/>
+            </ProtactRoute>
+          }
+        />
+        <Route
+          path='/document'
+          element={
+            <ProtactRoute>
+              <Navbar/>
+              <Document/>
             </ProtactRoute>
           }
         />

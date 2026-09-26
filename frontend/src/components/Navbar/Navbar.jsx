@@ -48,6 +48,10 @@ function Navbar() {
                 <Link to="/dashboard" className="nav-link">
                   Dashboard
                 </Link>
+
+                 <Link to="/document" className="nav-link">
+                  My Document
+                </Link>
                
               </>
             )}
