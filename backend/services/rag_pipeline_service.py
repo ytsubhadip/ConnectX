@@ -70,11 +70,6 @@ def ask_document(
 
     context = "\n\n".join(chunks)
 
-    print("===========print context==============")
-    print(context)
-    print("======================================")
-
-
     # gemini prompt
 
     prompt = f"""
@@ -100,7 +95,7 @@ def ask_document(
     try:
 
         response = gemini_client.models.generate_content(
-            model="gemini-3.5-flash",
+            model="gemini-3.8-flash",
             contents=prompt
         )
 

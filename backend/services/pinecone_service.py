@@ -22,20 +22,24 @@ def store_chunks(
     file_name:str,
     chunks:list
 ):
+    if not isinstance(chunks, list):
+        raise ValueError("chunks must be a list")
+
     records = []
     for i, chunk in enumerate(chunks):
         records.append({
-            "_id":f"{document_id}_{i}",
-            "text":chunk["text"],
+            "_id": f"{document_id}_{i}",
+            "text": chunk["text"],
             "document_id": document_id,
             "user_id": str(user_id),
-            "file_name":file_name,
-            "chunk_index":i
+            "file_name": file_name,
+            "chunk_index": i
         })
 
-        index.upsert_records(
-            namespace=str(user_id),
-            records=records
-        )
+    # Store all validated records in one batch.
+    index.upsert_records(
+        namespace=str(user_id),
+        records=records
+    )
 
-        return len(records)
+    return len(records)

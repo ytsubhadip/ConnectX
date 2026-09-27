@@ -94,7 +94,12 @@ async def upload_document(
                    "page": page_number,
                    "text":text.strip()
                })
-                
+
+        with open("pdf.text", "w", encoding="utf-8") as f:
+            for page in pages:
+                f.write(page["text"])
+                f.write("\n\n")
+
 
     except Exception as e:
         raise HTTPException(
@@ -116,6 +121,19 @@ async def upload_document(
         chunk_size=1000,
         overlap=200
     )
+
+    print(chunks)
+    # try:
+    #     with open("pdf_chunk.text", "w", encoding="utf-8") as f:
+    #         for chunk in chunks:
+    #             f.write(chunk)
+    #             f.write("\n\n")
+    # except OSError as e:
+    #     raise HTTPException(
+    #         status_code=500,
+    #         detail=f"Could not save chunks to pdf_chunk.text: {e}"
+    #     )
+
 
     # store in pincone
     total_chunk = []
