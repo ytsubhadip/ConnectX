@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import API from "../../service/API";
 import "./Document.css";
+
 
 function Document() {
 
@@ -13,7 +16,9 @@ function Document() {
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
 
-    const [selectedDocument, setSelectedDocument] = useState(null);
+    const navigate = useNavigate();
+
+
 
 
     // ============================
@@ -264,19 +269,6 @@ function Document() {
     };
 
 
-    // ============================
-    // SELECT DOCUMENT
-    // ============================
-
-    const handleSelectDocument = (
-        document
-    ) => {
-
-        setSelectedDocument(
-            document
-        );
-
-    };
 
 
     // ============================
@@ -380,6 +372,8 @@ function Document() {
                 PREVIOUS DOCUMENTS
             ====================== */}
 
+
+
             <div className="previous-documents">
 
                 <h2>
@@ -399,70 +393,63 @@ function Document() {
                 {!loading &&
                     documents.length === 0 && (
 
-                    <p>
-                        No documents found.
-                    </p>
+                        <p>
+                            No documents found.
+                        </p>
 
-                )}
+                    )}
 
 
                 {!loading &&
                     documents.length > 0 && (
 
-                    <div className="document-grid">
+                        <div className="document-grid">
 
-                        {documents.map(
-                            (document) => (
+                            {documents.map(
+                                (document) => (
 
-                            <div
-                                className="document-card"
-                                key={
-                                    document.document_id
-                                }
-                            >
+                                    <div
+                                        className="document-card"
+                                        key={
+                                            document.document_id
+                                        }
+                                    >
 
-                                <h3>
-                                    {
-                                        document.file_name
-                                    }
-                                </h3>
+                                        <h3>
+                                            {
+                                                document.file_name
+                                            }
+                                        </h3>
 
-                                <p>
-                                    Pages:{" "}
-                                    {
-                                        document.pages
-                                    }
-                                </p>
+                                        <p>
+                                            Pages:{" "}
+                                            {
+                                                document.pages
+                                            }
+                                        </p>
 
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        handleSelectDocument(
-                                            document
-                                        )
-                                    }
-                                >
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                navigate(
+                                                    `/document/${document.document_id}`
+                                                )
+                                            }
+                                        >
+                                            Chat
+                                        </button>
 
-                                    {selectedDocument
-                                        ?.document_id ===
-                                    document.document_id
+                                    </div>
 
-                                        ? "Selected"
+                                ))}
 
-                                        : "Select"
-                                    }
+                        </div>
 
-                                </button>
-
-                            </div>
-
-                        ))}
-
-                    </div>
-
-                )}
+                    )}
 
             </div>
+
+
 
 
         </div>

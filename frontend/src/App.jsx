@@ -8,6 +8,7 @@ import Profile from './pages/Profile/Profile';
 import Subscription from './pages/Subscription/Subscription';
 import Wallet from './pages/Wallet/Wallet';
 import Document from './pages/Document/Documnet';
+import DocumentChat from './pages/Document/DocumentChat';
 
 import ProtactRoute from './components/ProtectRoute/ProtactRoute';
 
@@ -61,7 +62,7 @@ function App() {
           element={
             <ProtactRoute>
               <Navbar />
-              <Wallet/>
+              <Wallet />
             </ProtactRoute>
           }
         />
@@ -69,13 +70,19 @@ function App() {
           path='/document'
           element={
             <ProtactRoute>
-              <Navbar/>
-              <Document/>
+              <Navbar />
+              <Document />
             </ProtactRoute>
           }
         />
 
+         <Route
+        path="/document/:documentId"
+        element={<DocumentChat/>}
+      />
       </Routes>
+
+     
 
     </BrowserRouter>
   )
