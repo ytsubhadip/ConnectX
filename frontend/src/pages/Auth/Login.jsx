@@ -41,7 +41,7 @@ function Login() {
       if (err.response && err.response.data && err.response.data.detail) {
         setError(err.response.data.detail);
       } else if (err.code === 'ERR_NETWORK') {
-        setError('Cannot connect to the server. Please ensure backend is running.');
+        setError('Please wait a moment while the backend server wakes up, then try again.');
       } else {
         setError('Invalid email or password. Please try again.');
       }
