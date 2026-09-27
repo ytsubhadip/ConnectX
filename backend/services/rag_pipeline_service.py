@@ -2,6 +2,7 @@ import os
 
 from pinecone import Pinecone
 from google import genai
+from google.genai import errors
 
 from dotenv import load_dotenv
 
@@ -34,20 +35,16 @@ def ask_document(
     # serch pinecone
 
     serch_result = index.search(
-        namespace="6",
+        namespace=str(user_id),
         inputs= {
                 "text": question
             },
-        top_k =5,
+        top_k =3,
         filter={
             "document_id": document_id,
             "user_id": user_id
         }
     )
-
-    print("========== PINECONE RESULT ==========")
-    print(serch_result)
-    print("=====================================")
 
 
     # Extract chunk
@@ -73,6 +70,10 @@ def ask_document(
 
     context = "\n\n".join(chunks)
 
+    print("===========print context==============")
+    print(context)
+    print("======================================")
+
 
     # gemini prompt
 
@@ -96,19 +97,33 @@ def ask_document(
 
         Answer clearly and concisely.
     """
+    try:
 
-    response = gemini_client.models.generate_content(
-        model="gemini-3.5-flash",
-        contents=prompt
-    )
+        response = gemini_client.models.generate_content(
+            model="gemini-3.5-flash",
+            contents=prompt
+        )
 
-    answer = response.text
+        answer = response.text
 
-    return{
-        "answer": answer,
-        "sources" : chunks
-    }
+        return{
+                "answer": answer,
+                "sources" : chunks
+            }
 
+    except errors.ServerError as e:
 
+        return{
+            "answer": "Unable to access the AI model server right now. Please try again later.",
+            "sources": []
+        }
+
+    except Exception as e:
+         return {
+        "answer": "Unable to generate an answer right now. Please try again later.",
+        "sources": []
+        }
+
+   
 if __name__ == "__main__":
     ask_document("1","730d5364-f1d1-4864-9285-b4795745d935","Her journey is interesting because she started as")
