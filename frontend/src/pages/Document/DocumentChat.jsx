@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 import { useState } from "react";
 import API from "../../service/API";
 import "./DocumentChat.css";
@@ -104,11 +105,6 @@ function DocumentChat() {
         // =========================
 
         try {
-
-            console.log("Sending question...");
-            console.log("User ID:", userData.user.id);
-            console.log("Document ID:", documentId);
-            console.log("Question:", trimmedQuestion);
 
 
             const response = await API.post(
@@ -282,9 +278,15 @@ function DocumentChat() {
                             }
                         >
 
-                            <p>
+                            {/* <p>
                                 {msg.text}
-                            </p>
+                            </p> */}
+
+                            <div className="message-text">
+                                <ReactMarkdown>
+                                    {msg.text}
+                                </ReactMarkdown>
+                            </div>
 
                         </div>
 

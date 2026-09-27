@@ -135,7 +135,7 @@ function Wallet() {
                                 <div className="transaction-right">
 
                                     <strong>
-                                        +{transaction.amount} Credits
+                                        {transaction.amount} amount
                                     </strong>
 
                                     <span>

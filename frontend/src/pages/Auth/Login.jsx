@@ -106,7 +106,7 @@ function Login() {
           <div className="auth-field">
             <div className="field-label-row">
               <label htmlFor="password">Password</label>
-              <a href="#forgot" className="forgot-link">Forgot password?</a>
+              {/* <a href="#forgot" className="forgot-link">Forgot password?</a> */}
             </div>
             <div className="input-wrapper">
               <svg className="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
