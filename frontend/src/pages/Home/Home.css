@@ -114,6 +114,7 @@
   background: #6353f8;
   transform: translateY(-2px);
   box-shadow: 0 0 35px 6px rgba(99, 83, 248, 0.75), 0 6px 18px rgba(99, 83, 248, 0.45);
+  cursor: pointer;
 }
 
 .btn-hero-secondary {
