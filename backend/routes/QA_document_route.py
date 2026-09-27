@@ -7,9 +7,11 @@ from pypdf import PdfReader
 
 from database import get_db
 from models.document_model import Document
+from schemas.qa_document_schema import ASkDocumetnQuestion
 
 from services.chunk_service import  create_chunks_from_pages
 from services.pinecone_service import store_chunks
+from services.rag_pipeline_service import ask_document
 
 
 # MAX file size
@@ -153,3 +155,32 @@ async def upload_document(
         "pages": document.pages,
         "chunks": len(chunks)
     }
+
+@route.post("/ask")
+async def ask_question(
+    data: ASkDocumetnQuestion
+):
+
+    try:
+
+        result = ask_document(
+            user_id=data.user_id,
+            document_id=data.document_id,
+            question=data.question
+        )
+
+        return {
+            "success": True,
+            "document_id": data.document_id,
+            "question": data.question,
+            "answer": result["answer"],
+            "sources": result["sources"]
+        }
+
+    except Exception as e:
+
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to answer question: {str(e)}"
+        )
+
