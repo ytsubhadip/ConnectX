@@ -6,6 +6,8 @@ from database import Base, get_db
 from models.user_model import User
 from schemas.user import LoginRequest, RegisterRequest, AdminLogin, AdminRegister
 
+from utils.password import verify_password, hash_password
+
 router = APIRouter(
     prefix="/api/auth",
     tags=["Authentication"]
@@ -29,12 +31,15 @@ async def register(userData: RegisterRequest,
             detail="Email already register"
         )
 
+    # hashed passowrd
+    hashed_password = hash_password(userData.password)
+
 
     # create user
     new_user = User(
         name = userData.name,
         email =userData.email,
-        password = userData.password,
+        password = hashed_password ,
         role = 'user',
     )
     db.add(new_user)
@@ -93,11 +98,18 @@ async def login(userData: LoginRequest,
                  detail="Invalid Email or password"
             )
         # password check
-       if (userData.password != user.password):
+     #   if (userData.password != user.password):
+     #        raise HTTPException(
+     #             status_code=401,
+     #             detail="Invalid Password"
+     #        )
+         
+       if not verify_password(userData.password, str(user.password)):
             raise HTTPException(
                  status_code=401,
-                 detail="Invalid Password"
+                 detail="Invalid password"
             )
+            
 
        return{
             "message": "successfull",
