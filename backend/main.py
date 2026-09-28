@@ -9,6 +9,7 @@ from routes import QA_document_route
 from models.subscription_model import (Subscription, SubscriptionPaln)
 from models.user_model import User
 from models.document_model import Document
+from models.connection_model import connection
 
 Base.metadata.create_all(
     bind = engine

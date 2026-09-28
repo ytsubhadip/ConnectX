@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from models.subscription_model import SubscriptionPaln, Subscription
 from models.user_model import User, WalletTransaction
+from utils.auth import get_current_user
 
 
 
@@ -23,9 +24,11 @@ async def get_plans(db : Session =Depends(get_db)):
 @router.post("/subscribe/{plan_id}")
 async def subscribe(
     plan_id: int,
-    user_id : int,
+    currecnt_user :User = Depends(get_current_user),
     db:Session = Depends(get_db)
 ):
+
+    user_id = currecnt_user.id
 
     plan = db.query(SubscriptionPaln).filter(
         SubscriptionPaln.id == plan_id
@@ -89,9 +92,10 @@ async def subscribe(
 
 @router.get("/wallet")
 async def get_wallet(
-    user_id : int,
+    currecnt_user :User = Depends(get_current_user),
     db : Session = Depends(get_db)
 ):
+    user_id = currecnt_user.id
     user = db.query(User).filter(
              User.id == user_id
     ).first()
@@ -108,9 +112,10 @@ async def get_wallet(
 
 @router.get("/wallet/transactions")
 async def get_transations(
-    user_id :int,
+    current_user : User = Depends(get_current_user),
     db :Session=Depends(get_db)
 ):
+    user_id= current_user.id
     transactions  =db.query(
         WalletTransaction
     ).filter(

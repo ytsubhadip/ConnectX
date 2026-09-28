@@ -1,174 +1,120 @@
-Intern Full-Stack Development Assignment
-Page 1
- Intern Full-Stack Development Assignment
- Frontend + Backend | User, Admin, Wallet, Connections, Video Call & AI
-Level: Intern    |    Goal: Build a simple working full-stack application
-1. Project Overview
-Build a simple web application with two types of users: User and Admin. The application should allow users to create an
-account, subscribe, receive money/credits in a wallet, connect with other users, make video calls, upload documents, and
-ask questions about their documents using Google Gemini AI. The Admin should be able to monitor users and their
-usage.
-2. User Types
- User
-Can register/login, subscribe, view wallet balance, connect with other users, make video calls, upload
-documents, and ask AI questions.
-Admin
-Can view users, subscriptions, wallet/credits, AI usage, documents, connections, and basic activity.
-3. Main Requirements
-A. Authentication
-  User registration with name, email, and password.
-  User login and logout.
-  Password should be stored securely using hashing.
-  Admin should also have a separate login or admin role.
-  Only logged-in users can access user features.
- 
-B. Subscription & Wallet
-  Create at least 2 simple subscription plans.
-  User can select a subscription plan.
-  After subscription, add a fixed amount of credits/money to the user's wallet.
-  Show the current wallet balance on the dashboard.
-  Show a simple wallet transaction/history page.
-  For the assignment, real payment integration is optional. A test/mock payment flow is enough.
- 
-C. Connect With Other Users
-  Display a list of users.
-  User can click 'Request to Connect'.
-  Other user can Accept or Reject the request.
-  Show connected users in a separate list.
-  Do not allow duplicate connection requests.
- 
-D. Video Call
-  A user can start a video call with an accepted connection.
-  Use a simple WebRTC implementation or a suitable free/test video-call solution.
-  User should be able to start/end the call.
-  Camera and microphone controls are preferred but can be basic.
-  Save basic call information such as caller, receiver, date, and duration.
+Tax Invoice/Bill of Supply/Cash Memo
+(Original for Recipient)
+*ASSPL-Amazon Seller Services Pvt. Ltd., ARIPL-Amazon Retail India Pvt. Ltd. (only where Amazon Retail India Pvt. Ltd. fulfillment center is co-located) 
+Customers desirous of availing input GST credit are requested to create a Business account and purchase on Amazon.in/business from Business eligible offers 
+Please note that this invoice is not a demand for payment
+Page 1 of 1
+For CLICKTECH RETAIL PRIVATE LIMITED:
+Authorized Signatory
+Order Number:171-2860430-8540317 Invoice Number :BOM5-3601996
+Order Date:23.11.2025 Invoice Details :MH-BOM5-297683823-2526
+Invoice Date :23.11.2025
+Sl.
+No Description Unit
+Price Discount Qty Net
+Amount
+Tax
+Rate
+Tax
+Type
+Tax
+Amount
+Total
+Amount
+1 boAt Airdopes 191 ANC, 32dB ANC, Ambient Mode,
+60HRS Battery, 4Mics ENx, in-Ear Detection, IWP
+Tech, Fast Charge, v5.3 Bluetooth Earbuds, TWS Ear
+Buds Wireless Earphones with mic (Pellucid White) |
+B0D734Z9K2 ( B0D734Z9K2 ) 
+HSN:85183020
+₹1,108.47 ₹0.00 1 ₹1,108.47 18% IGST ₹199.53 ₹1,308.00
+Shipping Charges ₹66.95 -₹66.95 ₹0.00 18% IGST ₹0.00 ₹0.00
+TOTAL: ₹199.53 ₹1,308.00
+Amount in Words:
+One Thousand Three Hundred Eight only
+Whether tax is payable under reverse charge - No
+Sold By :
+CLICKTECH RETAIL PRIVATE LIMITED 
+*Renaissance industrial smart city, Kalyan Sape
+road, Vashere village, Amane post,, Bhiwandi
+taluka, Thane disctrict 
+Thane, Maharashtra, 421302 
+IN 
+PAN No:AAJCC9783E 
+GST Registration No:27AAJCC9783E1Z7 
+ Dynamic QR Code:
+Billing Address :
+Sayantan Panja 
+12, Rajnagar sana ghat 
+GHATAL, WEST BENGAL, 721211 
+IN 
+State/UT Code:19 
+Shipping Address :
+Sayantan Panja 
+Sayantan Panja 
+BE128, Thakdari Road, Charulata Apartment,
+Rabindra Pally, Kestopur 
+KOLKATA, WEST BENGAL, 700102 
+IN 
+State/UT Code:19 
+Place of supply:WEST BENGAL 
+Place of delivery:WEST BENGAL
 
-Intern Full-Stack Development Assignment
-Page 2
-E. Document Upload + Gemini AI
-  User can upload a PDF document.
-  Show uploaded documents on the user's dashboard.
-  User selects a document and enters a question.
-  Send the document/question to the backend.
-  Use the Google Gemini API to generate an answer based on the document.
-  Display the AI answer on the frontend.
-  Save basic question/answer history.
-  Gemini API key must be stored in the backend environment file, not in frontend code.
- 
-F. Admin Dashboard
-  Admin can see the total number of users.
-  Admin can see active subscriptions.
-  Admin can see wallet/credit balances.
-  Admin can see credits/usage spent by users.
-  Admin can see uploaded documents.
-  Admin can see connection requests and basic video-call history.
-  Admin should be able to open a user's basic details.
-
-Intern Full-Stack Development Assignment
-Page 3
-4. Suggested Pages
- Page
-What it should contain
-Login
-Email, password, login button.
-Register
-Name, email, password, registration button.
-User Dashboard
-Wallet balance, subscription, connections, documents, recent activity.
-Subscription
-Show plans and a simple subscribe button.
-Wallet
-Balance and transaction history.
-Users
-List users and send connection requests.
-Connections
-Pending requests and accepted connections.
-Video Call
-Simple video call screen.
-Documents
-Upload and list PDF documents.
-AI Question
-Select document, enter question, show Gemini answer.
-Admin Dashboard
-Users, subscriptions, wallet/credits, usage and activity.
-5. Basic Backend APIs
-The following are examples. You can change the URL structure if your API design is clean and documented.
- Module
-Example APIs
-Authentication
-POST /api/register, POST /api/login
-Profile
-GET /api/profile
-Subscription
-GET /api/subscriptions, POST /api/subscribe
-Wallet
-GET /api/wallet, GET /api/wallet/transactions
-Connections
-GET /api/users, POST /api/connect, POST /api/connect/{id}/accept
-Calls
-POST /api/calls, GET /api/calls/history
-Documents
-POST /api/documents, GET /api/documents
-AI
-POST /api/documents/{id}/ask
-Admin
-GET /api/admin/users, GET /api/admin/usage
-6. Suggested Database Tables
- Table
-Example Fields
-User
-name, email, password, role
-Subscription
-user, plan, status, date
-Wallet
-user, balance
-WalletTransaction
-user, amount, type, date
-Connection
-sender, receiver, status
-Call
-caller, receiver, start/end time
-Document
-user, file, upload date
-AIQuestion
-user, document, question, answer, date
-7. Technology
-
-Intern Full-Stack Development Assignment
-Page 4
-Use technologies that you are comfortable with. A suggested stack is: Frontend: React.js   Backend: Django REST
-Framework or FastAPI   Database: PostgreSQL/MySQL   AI: Google Gemini API.
-8. Important Rules
-  Keep the project simple. Do not over-engineer the solution.
-  Frontend and backend must communicate through APIs.
-  Validate important inputs on the backend.
-  Use environment variables for API keys and passwords.
-  Do not put the Gemini API key directly in frontend JavaScript.
-  Users must not be able to view another user's private documents or wallet information.
-  Admin APIs/pages must only be accessible to Admin users.
-  Write clean, readable code and keep the project structure organized.
- 
-9. Expected Deliverables
-  Frontend source code.
-  Backend source code.
-  Database models and migrations.
-  API documentation or Postman collection.
-  README with setup instructions.
-  .env.example file without real API keys.
-  Basic screenshots/demo of the working application.
-  A short explanation of the project structure and major features.
- 
-10. Minimum Working Flow
- 1. Register → Login.
- 2. Select a subscription → Receive wallet credits.
- 3. View other users → Send connection request.
- 4. Other user accepts → Users become connected.
- 5. Start a video call with the connected user.
- 6. Upload a PDF → Select the document → Ask a question.
- 7. Backend sends the relevant document content/question to Gemini → Display the answer.
- 8. Admin logs in → Views users, subscriptions, wallet balances, and usage.
- 
-Intern Assignment Objective: Focus on making the complete basic flow work correctly. A simple, clean implementation
-is preferred over adding unnecessary advanced features.
+Tax Invoice/Bill of Supply/Cash Memo
+(Original for Recipient)
+Please note that this invoice is not a demand for payment 
+Regd Office: Amazon Seller Services Private Limited 
+8th Floor, Brigade World Trade Center 
+Dr Raj Kumar Road, Malleshwaram(West) 
+Telephone: +91 89 33420300 
+Fax: +91 80 30625685 
+Email: customer-service@amazon.in 
+Amazon.in - Amazon Seller Services Private Limited 
+*ASSPL-Amazon Seller Services Pvt. Ltd., ARIPL-Amazon Retail India Pvt. Ltd. (only where Amazon Retail India Pvt. Ltd. fulfillment center is co-located) 
+Customers desirous of availing input GST credit are requested to create a Business account and purchase on Amazon.in/business from Business eligible offers
+Page 1 of 1
+For Amazon Seller Services Private Limited:
+Authorized Signatory
+Order Number:171-2860430-8540317 Invoice Number :POD-26-202888712
+Order Date:23.11.2025 Invoice Details :MH-BOM5-1044-2526
+Invoice Date :23.11.2025
+Sl. No Description Unit Price Qty Net Amount Tax Rate Tax Type Tax Amount Total Amount
+1 Cash/Pay on Delivery fee: ₹8.47 ₹8.47 18% IGST ₹1.53 ₹10.00
+TOTAL: ₹1.53 ₹10.00
+Amount in Words:
+Ten only
+(1) Service Accounting Code: 998599 
+Whether tax is payable under reverse charge - No
+Signature valid
+Digitally signed by DS AMAZON SELLER SERVICES PRIVATE LIMITED 6
+Date: 2025.11.23 06:09:53 UTC 
+Reason: Invoice 
+Sold By :
+Amazon Seller Services Private Limited 
+*#26/1, Brigade Gateway, 8th Floor., Dr 
+Rajkumar Road, Malleshwaram West 
+Bangalore, Karnataka – 560055 
+IN 
+PAN No:AAICA3918J 
+GST Registration No:29AAICA3918J1ZE 
+CIN No:U51900KA2010PTC053234 
+ Dynamic QR Code:
+Billing Address :
+Sayantan Panja 
+Sayantan Panja 
+BE128, Thakdari Road, Charulata Apartment,
+Rabindra Pally, Kestopur 
+KOLKATA, WEST BENGAL, 700102 
+IN 
+State/UT Code:19 
+Shipping Address :
+Sayantan Panja 
+Sayantan Panja 
+BE128, Thakdari Road, Charulata Apartment,
+Rabindra Pally, Kestopur 
+KOLKATA, WEST BENGAL, 700102 
+IN 
+State/UT Code:19 
+Place of supply:WEST BENGAL 
+Place of delivery:WEST BENGAL
 

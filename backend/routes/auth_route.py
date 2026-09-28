@@ -7,6 +7,7 @@ from models.user_model import User
 from schemas.user import LoginRequest, RegisterRequest, AdminLogin, AdminRegister
 
 from utils.password import verify_password, hash_password
+from utils.jwt import create_access_token
 
 router = APIRouter(
     prefix="/api/auth",
@@ -109,11 +110,26 @@ async def login(userData: LoginRequest,
                  status_code=401,
                  detail="Invalid password"
             )
+
+     #  create access token
+       access_token = create_access_token(
+            {
+                 "sub": str(user.id),
+                 "role": user.role
+            }
+       )
             
 
        return{
             "message": "successfull",
-            "user": user
+            "access_token": access_token,
+            "token_type":"bearer",
+            "user": {
+                 "id": user.id,
+                 "name": user.name,
+                 "email": user.email,
+                 "role":user.role
+            }
        }
 
 

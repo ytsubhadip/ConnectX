@@ -8,6 +8,9 @@ from pypdf import PdfReader
 from database import get_db
 from models.document_model import Document
 from schemas.qa_document_schema import ASkDocumetnQuestion
+from models.user_model import User
+from utils.auth import get_current_user
+
 
 from services.chunk_service import  create_chunks_from_pages
 from services.pinecone_service import store_chunks
@@ -23,10 +26,10 @@ route = APIRouter(
 
 @route.get("/")
 async def get_document(
-    user_id : str,
+    current_user : User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-
+    user_id = current_user.id
     documents =(
         db.query(Document)
         .filter(Document.user_id == user_id)
@@ -55,7 +58,7 @@ async def get_document(
 
 @route.post("/upload")
 async def upload_document(
-    user_id : str = Form(...),
+    current_user :User = Depends(get_current_user),
     file : UploadFile = File(...),
     db : Session = Depends(get_db)):
 
@@ -65,6 +68,8 @@ async def upload_document(
             status_code=400,
             detail="Only pdf files are allowed"
         )
+
+    user_id = str(current_user.id)
 
     # read file
     file_content =  await file.read()
@@ -122,7 +127,7 @@ async def upload_document(
         overlap=200
     )
 
-    print(chunks)
+    # print(chunks)
     # try:
     #     with open("pdf_chunk.text", "w", encoding="utf-8") as f:
     #         for chunk in chunks:
@@ -176,13 +181,17 @@ async def upload_document(
 
 @route.post("/ask")
 async def ask_question(
-    data: ASkDocumetnQuestion
+    data: ASkDocumetnQuestion,
+    current_user :User = Depends(get_current_user)
 ):
 
+    user_id = str(current_user.id)
+
     try:
+        
 
         result = ask_document(
-            user_id=data.user_id,
+            user_id=user_id,
             document_id=data.document_id,
             question=data.question
         )
