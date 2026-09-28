@@ -110,7 +110,6 @@ function DocumentChat() {
             const response = await API.post(
                 "/api/document/ask",
                 {
-                    user_id: String(userData.user.id),
                     document_id: documentId,
                     question: trimmedQuestion
                 }

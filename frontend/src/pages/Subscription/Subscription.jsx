@@ -74,13 +74,7 @@ function Subscription() {
 
 
             const response = await API.post(
-                `/api/subscription/subscribe/${planId}`,
-                null,
-                {
-                    params: {
-                        user_id: user.user.id
-                    }
-                }
+                `/api/subscription/subscribe/${planId}`
             );
 
 

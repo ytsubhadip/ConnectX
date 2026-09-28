@@ -29,12 +29,7 @@ function Wallet() {
             console.log("User:", user);
 
             const response = await API.get(
-                "/api/subscription/wallet/transactions",
-                {
-                    params: {
-                        user_id: user.user.id
-                    }
-                }
+                "/api/subscription/wallet/transactions"
             );
 
             console.log("Transactions:", response.data);

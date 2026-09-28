@@ -30,7 +30,8 @@ function Login() {
         }
       );
 
-      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      localStorage.setItem('access_token', response.data.access_token);
       setSuccess('Login successful! Redirecting...');
 
       setTimeout(() => {

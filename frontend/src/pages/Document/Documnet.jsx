@@ -35,7 +35,7 @@ function Document() {
         console.log("Invalid user data");
     }
 
-    const userId = storedUser?.user?.id;
+    const userId = storedUser?.id;
 
 
     // ============================
@@ -126,11 +126,7 @@ function Document() {
 
             const response = await API.get(
                 "/api/document/",
-                {
-                    params: {
-                        user_id: userId
-                    }
-                }
+              
             );
 
             setDocuments(
@@ -201,12 +197,6 @@ function Document() {
 
             const formData =
                 new FormData();
-
-
-            formData.append(
-                "user_id",
-                userId
-            );
 
 
             formData.append(
@@ -377,7 +367,7 @@ function Document() {
             <div className="previous-documents">
 
                 <h2>
-                    Previous Documents
+                    Upload Documents
                 </h2>
 
 

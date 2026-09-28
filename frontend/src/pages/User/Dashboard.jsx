@@ -20,28 +20,24 @@ function Dashboard() {
     }
   }, []);
 
-  const userId = user?.user?.id || user?.id;
-  const userName = user?.user?.name || user?.name || "User";
-  const userEmail = user?.user?.email || user?.email || "";
+  const userId = user?.id;
+  const userName = user?.name || "User";
+  const userEmail = user?.email || "";
 
   useEffect(() => {
     if (!userId) return;
 
     // Fetch wallet balance
-    API.get("/api/subscription/wallet", {
-      params: { user_id: userId },
-    })
+    API.get("/api/subscription/wallet")
       .then((res) => {
         if (res.data?.wallet_ballance !== undefined) {
           setBalance(res.data.wallet_ballance);
         }
-      })
+      })  
       .catch((err) => console.log("Failed to load wallet balance:", err));
 
     // Fetch documents count
-    API.get("/api/document/", {
-      params: { user_id: userId },
-    })
+    API.get("/api/document/")
       .then((res) => {
         if (res.data?.documents) {
           setDocumentCount(res.data.documents.length);

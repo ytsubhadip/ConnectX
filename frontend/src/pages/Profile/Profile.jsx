@@ -27,11 +27,8 @@ function Profile(){
     const getWallet = async ()=>{
         try{
             const response = await API.get(
-                "/api/subscription/wallet",{
-                    params:{
-                        user_id:user.user.id
-                    }
-                }
+                "/api/subscription/wallet"
+                   
             );
 
             setBalance(
@@ -62,13 +59,13 @@ function Profile(){
                 {/* profile headder */}
                 <div className="profile-header">
                     <div className="profile-image">
-                        {user.user.name?.charAt(0)}
+                        {user.name?.charAt(0)}
                     </div>
                     <h1>
-                        {user.user.name}
+                        {user.name}
                     </h1>
                     <p>
-                        {user.user.email}
+                        {user.email}
                     </p>
                 </div>
 
@@ -79,21 +76,21 @@ function Profile(){
                     <div className="profile-row">
                         <span>Name</span>
                         <strong>
-                            {user.user.name}
+                            {user.name}
                         </strong>
                     </div>
 
                       <div className="profile-row">
                         <span>Email</span>
                         <strong>
-                            {user.user.email}
+                            {user.email}
                         </strong>
                     </div>
 
                       <div className="profile-row">
                         <span>Role</span>
                         <strong>
-                            {user.user.role}
+                            {user.role}
                         </strong>
                     </div>
 

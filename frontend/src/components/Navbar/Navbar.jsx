@@ -13,6 +13,7 @@ function Navbar() {
   const handleLogout = () => {
 
     localStorage.removeItem("user");
+    localStorage.removeItem("access_token");
 
     navigate("/login");
   };
@@ -91,7 +92,7 @@ function Navbar() {
               >
 
                 <div className="profile-avatar">
-                  {user.user.name?.charAt(0).toUpperCase()}
+                  {user.name?.charAt(0).toUpperCase()}
                 </div>
 
                 <span>
