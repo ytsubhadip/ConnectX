@@ -33,7 +33,7 @@ function Dashboard() {
         if (res.data?.wallet_ballance !== undefined) {
           setBalance(res.data.wallet_ballance);
         }
-      })  
+      })
       .catch((err) => console.log("Failed to load wallet balance:", err));
 
     // Fetch documents count
@@ -89,6 +89,8 @@ function Dashboard() {
             </Link>
           </div>
 
+
+
           <div className="stat-card">
             <div className="stat-icon doc-stat-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -128,10 +130,10 @@ function Dashboard() {
 
         {/* All Available User Pages & Sections */}
         <section className="dashboard-section">
-             <div className="section-header">
-                <h2>Explore ConnectX</h2>
-                <p>Choose a feature to get started.</p>
-            </div> 
+          <div className="section-header">
+            <h2>Explore ConnectX</h2>
+            <p>Choose a feature to get started.</p>
+          </div>
 
           <div className="features-grid">
             {/* 1. Document Chat */}
@@ -154,7 +156,22 @@ function Dashboard() {
               </div>
             </Link>
 
-           
+            {/* connect with friend */}
+
+            <Link to="/connections" className="feature-card">
+              <div className="feature-icon wallet-bg">
+                👥
+              </div>
+              <div className="feature-body">
+                <h3>Connect People</h3>
+                <p>Discover people, send connection requests,
+            and manage your connections.</p>
+              </div>
+              <div className="feature-footer">
+                <span>Manage Connections</span>
+                <span className="arrow">&rarr;</span>
+              </div>
+            </Link>
 
             {/* 3. Wallet History */}
             <Link to="/wallet" className="feature-card">
@@ -174,7 +191,7 @@ function Dashboard() {
               </div>
             </Link>
 
-      
+
           </div>
         </section>
       </main>

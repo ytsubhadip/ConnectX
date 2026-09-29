@@ -60,9 +60,9 @@ function Home() {
           >
             Get Started
           </button>
-          <a href="#ai-chatbot" className="btn-hero-secondary">
+          {/* <a href="#ai-chatbot" className="btn-hero-secondary" >
             Learn More <span className="btn-arrow">&rsaquo;</span>
-          </a>
+          </a> */}
         </div>
       </section>
 
