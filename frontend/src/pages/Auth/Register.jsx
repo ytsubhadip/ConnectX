@@ -32,7 +32,6 @@ function Register() {
         }
       );
 
-      console.log('Registration response:', response.data);
       setSuccess('Account created successfully! Redirecting to login...');
 
       setTimeout(() => {

@@ -29,13 +29,12 @@ function Subscription() {
                 "/api/subscription/plans"
             );
 
-            console.log("Plans:", response.data);
 
             setPlans(response.data);
 
         } catch (error) {
 
-            console.log(error);
+
 
             setError(
                 error.response?.data?.detail ||
@@ -70,7 +69,6 @@ function Subscription() {
 
             const user = JSON.parse(userData);
 
-            console.log("User:", user);
 
 
             const response = await API.post(
@@ -78,10 +76,7 @@ function Subscription() {
             );
 
 
-            console.log(
-                "Subscription:",
-                response.data
-            );
+
 
 
             setSuccess(
@@ -95,8 +90,7 @@ function Subscription() {
 
         } catch (error) {
 
-            console.log(error);
-
+          
             setError(
                 error.response?.data?.detail ||
                 "Subscription failed"

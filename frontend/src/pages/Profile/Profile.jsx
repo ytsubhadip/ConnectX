@@ -35,8 +35,6 @@ function Profile(){
                 response.data.wallet_ballance
             )
 
-            console.log(response)
-
         }
         catch(error){
             console.log(error)

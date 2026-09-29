@@ -53,9 +53,6 @@ function Document() {
             return;
         }
 
-        console.log("Selected file:", selectedFile);
-
-
         // Check PDF
 
         if (
@@ -210,13 +207,6 @@ function Document() {
                     "/api/document/upload",
                     formData
                 );
-
-
-            console.log(
-                "Upload response:",
-                response.data
-            );
-
 
             setMessage(
                 "Document uploaded successfully."

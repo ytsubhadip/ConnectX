@@ -26,20 +26,20 @@ function Wallet() {
 
             const user = JSON.parse(userData);
 
-            console.log("User:", user);
+            
 
             const response = await API.get(
                 "/api/subscription/wallet/transactions"
             );
 
-            console.log("Transactions:", response.data);
+        
 
             setTransactions(response.data);
 
         }
         catch (error) {
 
-            console.log("Transaction Error:", error);
+            
 
             setError(
                 error.response?.data?.detail ||

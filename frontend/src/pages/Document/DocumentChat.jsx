@@ -10,12 +10,8 @@ function DocumentChat() {
     // =========================
     // DOCUMENT ID
     // =========================
-
     const { documentId } = useParams();
-
     const navigate = useNavigate();
-
-
     // =========================
     // STATES
     // =========================
@@ -74,9 +70,6 @@ function DocumentChat() {
         // Convert JSON string → object
         const userData = JSON.parse(storedUser);
 
-        console.log("User data:", userData);
-
-
         // =========================
         // USER MESSAGE
         // =========================
@@ -114,10 +107,6 @@ function DocumentChat() {
                     question: trimmedQuestion
                 }
             );
-
-
-            console.log("Backend response:", response.data);
-
 
             // =========================
             // AI MESSAGE
