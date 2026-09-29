@@ -53,6 +53,10 @@ function Navbar() {
                  <Link to="/document" className="nav-link">
                   My Document
                 </Link>
+
+                 <Link to="/connections" className="nav-link">
+                  Connection
+                </Link>
                
               </>
             )}

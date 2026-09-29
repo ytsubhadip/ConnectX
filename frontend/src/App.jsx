@@ -9,6 +9,7 @@ import Subscription from './pages/Subscription/Subscription';
 import Wallet from './pages/Wallet/Wallet';
 import Document from './pages/Document/Documnet';
 import DocumentChat from './pages/Document/DocumentChat';
+import Connections from './pages/Connections/Connections';
 
 import ProtactRoute from './components/ProtectRoute/ProtactRoute';
 
@@ -76,13 +77,23 @@ function App() {
           }
         />
 
-         <Route
-        path="/document/:documentId"
-        element={<DocumentChat/>}
-      />
+        <Route
+          path="/document/:documentId"
+          element={<DocumentChat />}
+        />
+
+        <Route
+          path="/connections"
+          element={
+            <ProtactRoute>
+              <Navbar/>
+              <Connections />
+            </ProtactRoute>
+          }
+        />
       </Routes>
 
-     
+
 
     </BrowserRouter>
   )
