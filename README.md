@@ -61,7 +61,7 @@ ConnectX/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/ConnectX.git
+https://github.com/ytsubhadip/ConnectX.git
 cd ConnectX
 ```
 
