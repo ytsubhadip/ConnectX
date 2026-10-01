@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, replace, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 import API from '../../service/API';
@@ -32,10 +32,19 @@ function Login() {
 
       localStorage.setItem('user', JSON.stringify(response.data.user));
       localStorage.setItem('access_token', response.data.access_token);
+
       setSuccess('Login successful! Redirecting...');
 
       setTimeout(() => {
-        navigate('/dashboard');
+        const user =JSON.parse(localStorage.getItem("user"));
+
+        if(user.role === "admin"){
+            navigate('/admin-dashboard',{replace:true});
+        }
+        else{
+          navigate("/dashboard",{replace:true})
+        }
+        
       }, 700);
     } catch (err) {
       console.error(err);

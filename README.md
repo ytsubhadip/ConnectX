@@ -88,6 +88,8 @@ Create a `.env` file inside the `backend` folder and add your database settings:
 
 ```env
 MYSQL_URI=mysql://username:password@host:port/database_name
+admin email=admin@gmail.com
+admin password=admin1234
 ```
 
 Then start the backend:
@@ -200,10 +202,4 @@ Authorization: Bearer <your_access_token>
 7. Subscribe to a payment plan and track wallet credits.
 8. Start a video call with a connected user.
 
-## License
 
-This project is licensed under the MIT License.
-
-## Contributors
-
-This project is currently being developed as a full-stack application with frontend and backend integration for networking, AI document support, and communication features.

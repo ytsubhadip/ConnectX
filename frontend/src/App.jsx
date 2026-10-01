@@ -15,7 +15,7 @@ import ProtactRoute from './components/ProtectRoute/ProtactRoute';
 
 
 import AdminDashboard from './pages/Admin/AdminDashboard';
-import AdminRoute from './components/AdminRoute/AdminRoute';
+
 
 function App() {
   return (
@@ -105,15 +105,13 @@ function App() {
           }
         />
 
-        <Route element={<AdminRoute />}>
           <Route
             path='/admin-dashboard'
             element={
               <AdminDashboard />
             }
-
           />
-        </Route>
+       
 
       </Routes>
 
