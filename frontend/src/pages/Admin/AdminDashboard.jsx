@@ -1,5 +1,6 @@
 
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../../service/API";
 import "./AdminDashboard.css";
 
@@ -49,12 +50,18 @@ function StatCard({ title, value, description }) {
 }
 
 function AdminDashboard() {
+    const navigate = useNavigate();
     const [stats, setStats] = useState({});
     const [data, setData] = useState(initialData);
     const [activeTab, setActiveTab] = useState("users");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [refreshing, setRefreshing] = useState(false);
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        navigate("/login");
+    };
 
     const loadDashboard = useCallback(async (isRefresh = false) => {
         setError("");
@@ -152,13 +159,23 @@ function AdminDashboard() {
                     <p>Monitor users, subscriptions, credits and platform activity.</p>
                 </div>
 
-                <button
-                    className="admin-refresh-btn"
-                    onClick={() => loadDashboard(true)}
-                    disabled={refreshing}
-                >
-                    {refreshing ? "Refreshing..." : "↻ Refresh"}
-                </button>
+                <div className="admin-header-actions">
+                    <button
+                        className="admin-refresh-btn"
+                        onClick={() => loadDashboard(true)}
+                        disabled={refreshing}
+                    >
+                        {refreshing ? "Refreshing..." : "↻ Refresh"}
+                    </button>
+
+                    <button
+                        className="admin-logout-btn"
+                        onClick={handleLogout}
+                        title="Log out of admin session"
+                    >
+                        Logout
+                    </button>
+                </div>
             </header>
 
             {error && (

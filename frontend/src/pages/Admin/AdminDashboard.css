@@ -119,6 +119,13 @@
   margin: 0;
 }
 
+/* Header Actions Container */
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 /* Refresh Button */
 .admin-refresh-btn {
   display: inline-flex;
@@ -154,6 +161,38 @@
   opacity: 0.55;
   cursor: not-allowed;
   transform: none;
+}
+
+/* Logout Button */
+.admin-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  color: #fca5a5;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.65rem 1.35rem;
+  border-radius: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.admin-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.25);
+}
+
+.admin-logout-btn:active {
+  transform: translateY(0);
 }
 
 /* ==========================================================================
@@ -468,8 +507,16 @@
     align-items: flex-start;
   }
 
-  .admin-refresh-btn {
+  .admin-header-actions {
     width: 100%;
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .admin-refresh-btn,
+  .admin-logout-btn {
+    flex: 1;
+    width: auto;
     justify-content: center;
   }
 
