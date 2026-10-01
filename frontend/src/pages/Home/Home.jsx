@@ -97,22 +97,9 @@ function Home() {
               <a href="#ai-chatbot">AI Chatbot</a>
               <a href="#features">Features</a>
               <a href="#pricing">Pricing</a>
-              <a href="#docs">API Docs</a>
             </div>
-            <div className="footer-col">
-              <h4>Solutions</h4>
-              <a href="#support">Customer Support</a>
-              <a href="#analytics">Sales Copilot</a>
-              <a href="#automation">Workflow Automation</a>
-              <a href="#rag">Enterprise RAG</a>
-            </div>
-            <div className="footer-col">
-              <h4>Company</h4>
-              <a href="#about">About</a>
-              <a href="#careers">Careers</a>
-              <a href="#privacy">Privacy</a>
-              <a href="#terms">Terms</a>
-            </div>
+           
+            
           </div>
         </div>
 
