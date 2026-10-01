@@ -177,6 +177,20 @@ http://localhost:8000
 - `GET /api/admin/documents` — list uploaded documents
 - `GET /api/admin/connections` — list connection history
 
+## Screenshots
+
+<div align="center">
+  <img src="images/Screenshot 2026-10-02 001944.png" width="800" alt="ConnectX home screen" />
+  <img src="images/Screenshot 2026-10-02 001959.png" width="800" alt="ConnectX dashboard" />
+  <img src="images/Screenshot 2026-10-02 002052.png" width="800" alt="ConnectX connection page" />
+  <img src="images/Screenshot 2026-10-02 002104.png" width="800" alt="ConnectX documents page" />
+  <img src="images/Screenshot 2026-10-02 002116.png" width="800" alt="ConnectX subscription page" />
+  <img src="images/Screenshot 2026-10-02 002145.png" width="800" alt="ConnectX wallet page" />
+  <img src="images/Screenshot 2026-10-02 002204.png" width="800" alt="ConnectX PDF chat page" />
+  <img src="images/Screenshot 2026-10-02 002233.png" width="800" alt="ConnectX admin dashboard" />
+  <img src="images/Screenshot 2026-10-02 002314.png" width="800" alt="ConnectX video call" />
+</div>
+
 ## Authentication
 
 Protected API routes require a bearer token in the request header:
