@@ -73,38 +73,7 @@ function Home() {
 
 
 
-      {/* Footer */}
-      <footer className="footer-section">
-        <div className="footer-inner">
-          <div className="footer-brand">
-            <div className="footer-logo">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="4" r="2.8" />
-                <circle cx="12" cy="20" r="2.8" />
-                <circle cx="4" cy="12" r="2.8" />
-                <circle cx="20" cy="12" r="2.8" />
-              </svg>
-              <span>ConnectX</span>
-            </div>
-            <p className="footer-desc">
-              Next-generation AI features and autonomous chatbot platform for modern enterprises.
-            </p>
-          </div>
-
-          <div className="footer-links-grid">
-            <div className="footer-col">
-              <h4>Product</h4>
-              <a href="#ai-chatbot">AI Chatbot</a>
-              <a href="#features">Features</a>
-              <a href="#pricing">Pricing</a>
-            </div>
-           
-            
-          </div>
-        </div>
-
-
-      </footer>
+      
     </div>
   );
 }
