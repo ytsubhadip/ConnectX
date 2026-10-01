@@ -10,8 +10,12 @@ import Wallet from './pages/Wallet/Wallet';
 import Document from './pages/Document/Documnet';
 import DocumentChat from './pages/Document/DocumentChat';
 import Connections from './pages/Connections/Connections';
-
+import VideoCall from './pages/VideoCall/VideoCall';
 import ProtactRoute from './components/ProtectRoute/ProtactRoute';
+
+
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminRoute from './components/AdminRoute/AdminRoute';
 
 function App() {
   return (
@@ -86,11 +90,31 @@ function App() {
           path="/connections"
           element={
             <ProtactRoute>
-              <Navbar/>
+              <Navbar />
               <Connections />
             </ProtactRoute>
           }
         />
+
+        <Route
+          path="/video-call/:callId"
+          element={
+            <ProtactRoute>
+              <VideoCall />
+            </ProtactRoute>
+          }
+        />
+
+        <Route element={<AdminRoute />}>
+          <Route
+            path='/admin-dashboard'
+            element={
+              <AdminDashboard />
+            }
+
+          />
+        </Route>
+
       </Routes>
 
 

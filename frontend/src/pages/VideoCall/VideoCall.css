@@ -1,0 +1,385 @@
+/* ==========================================================================
+   ConnectX Video Call - Modern Real-Time Video Conference UI
+   ========================================================================== */
+
+/* Fullscreen Immersive Container */
+.video-call-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #07080b;
+  color: #f8fafc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  z-index: 9999; /* Overlay entire page including any background navigation */
+}
+
+/* ==========================================================================
+   Header Overlay
+   ========================================================================== */
+.video-call-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 8, 11, 0.85) 0%,
+    rgba(7, 8, 11, 0.45) 65%,
+    transparent 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.video-call-header h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+/* Brand icon before header title */
+.video-call-header h2::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
+  box-shadow: 0 0 12px #6366f1;
+}
+
+/* Call Status Pill (Connected / Waiting) */
+.video-call-header span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+/* Live status pulse dot */
+.video-call-header span::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: statusPulse 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes statusPulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* When status is Connected */
+.video-call-header span:has-text,
+.video-call-header span:not(:empty) {
+  /* Dynamic styling handled seamlessly */
+}
+
+/* If text inside span is 'Connected', style with vibrant green */
+.video-call-header span:not([class]) {
+  /* default fallback */
+}
+
+/* ==========================================================================
+   Error Banner
+   ========================================================================== */
+.video-call-error {
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(239, 68, 68, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #ffffff;
+  padding: 0.75rem 1.6rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65), 0 0 20px rgba(239, 68, 68, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -15px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ==========================================================================
+   Video Stage Area
+   ========================================================================== */
+.video-area {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #0b0c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Radar ripple effect when waiting for remote participant */
+.video-area::before {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+  filter: blur(20px);
+  animation: radarGlow 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes radarGlow {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+}
+
+/* Remote Video (Main Fullscreen Participant) */
+.remote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #0d0e12;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* Local Video Picture-in-Picture (PiP) */
+.local-video {
+  position: absolute;
+  right: 2rem;
+  bottom: 6.5rem;
+  z-index: 25;
+  width: 260px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 16px;
+  background-color: #1a1c23;
+  transform: scaleX(-1); /* Mirror selfie camera naturally */
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75),
+              0 0 24px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.local-video:hover {
+  transform: scaleX(-1) scale(1.04);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85),
+              0 0 28px rgba(99, 102, 241, 0.3);
+}
+
+/* ==========================================================================
+   Call Controls (Floating Capsule Bar)
+   ========================================================================== */
+.call-controls {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 0.65rem 1.15rem;
+  background: rgba(18, 20, 26, 0.82);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.85),
+              0 0 30px -8px rgba(99, 102, 241, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition: all 0.25s ease;
+}
+
+.call-controls:hover {
+  background: rgba(22, 25, 33, 0.9);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Control Buttons (Mute, Camera Off/On) */
+.control-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.control-button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.control-button:active {
+  transform: translateY(0);
+}
+
+/* End Call Button (High-Contrast Red Capsule) */
+.end-call-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1.45rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(239, 68, 68, 0.45);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.end-call-button:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(239, 68, 68, 0.65);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.end-call-button:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+/* Tablets and small laptops */
+@media (max-width: 900px) {
+  .local-video {
+    width: 200px;
+    height: 125px;
+    right: 1.5rem;
+    bottom: 6rem;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 600px) {
+  .video-call-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .video-call-header h2 {
+    font-size: 1rem;
+  }
+
+  .video-call-header span {
+    padding: 0.3rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .local-video {
+    width: 110px;
+    height: 165px;
+    right: 1rem;
+    bottom: 5.75rem;
+    border-radius: 12px;
+  }
+
+  .call-controls {
+    bottom: 1.25rem;
+    width: calc(100% - 2rem);
+    max-width: 360px;
+    padding: 0.5rem 0.65rem;
+    gap: 0.45rem;
+  }
+
+  .control-button,
+  .end-call-button {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.78rem;
+    flex: 1;
+    justify-content: center;
+  }
+}

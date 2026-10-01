@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../../service/API";
 import "./Connections.css";
 
 function Connections() {
+    const navigate = useNavigate();
 
     const [users, setUsers] = useState([]);
     const [requests, setRequests] = useState([]);
@@ -18,6 +20,37 @@ function Connections() {
     useEffect(() => {
         loadConnectionData();
     }, []);
+
+    const startCall = async (connectionId) => {
+
+    try {
+
+        const response = await API.post(
+            `/api/call/start/${connectionId}`
+        );
+
+        const callId =
+            response.data.call_id;
+
+        navigate(
+            `/video-call/${callId}`,
+            {
+                state: {
+                    isCaller: true
+                }
+            }
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Unable to start call:",
+            error
+        );
+
+    }
+
+};
 
     const loadConnectionData = async () => {
 
@@ -76,7 +109,7 @@ function Connections() {
 
             await API.post(
                 `/api/connection/request/${receiverId}`
-            );  
+            );
 
             alert("Connection request sent!");
 
@@ -406,11 +439,33 @@ function Connections() {
                                         </p>
 
                                     </div>
+                                    <div className="connected-actions">
+                                        <button
+                                            className="video-call-button"
+                                            onClick={() => startCall(connection.connection_id)}
+                                            title="Start Video Call"
+                                        >
+                                            <svg
+                                                className="video-call-icon"
+                                                width="15"
+                                                height="15"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2.2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            >
+                                                <polygon points="23 7 16 12 23 17 23 7" />
+                                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                                            </svg>
+                                            <span>Call</span>
+                                        </button>
 
-
-                                    <span className="connected-badge">
-                                        Connected
-                                    </span>
+                                        <span className="connected-badge">
+                                            Connected
+                                        </span>
+                                    </div>
 
                                 </div>
 

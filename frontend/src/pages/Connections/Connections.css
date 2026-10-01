@@ -262,6 +262,49 @@
   background: linear-gradient(135deg, #31a24c 0%, #20c997 100%);
 }
 
+/* Connected Card Actions Container */
+.connected-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Video Call Action Button */
+.video-call-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #1877f2 0%, #0084ff 100%);
+  color: #ffffff;
+  border: none;
+  padding: 0.42rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(24, 119, 242, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.video-call-button:hover {
+  background: linear-gradient(135deg, #166fe5 0%, #0073e6 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.55);
+}
+
+.video-call-button:active {
+  transform: translateY(0);
+}
+
+.video-call-icon {
+  flex-shrink: 0;
+  display: block;
+}
+
 /* Connected Status Badge (Messenger Pill) */
 .connected-badge {
   display: inline-flex;
@@ -403,6 +446,7 @@
 
   .connect-button,
   .connected-badge,
+  .video-call-button,
   .accept-button,
   .reject-button {
     padding: 0.38rem 0.7rem;
