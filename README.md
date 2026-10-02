@@ -58,6 +58,9 @@ ConnectX/
 
 ## Local Installation
 
+admin email=admin@gmail.com
+admin password=admin1234
+
 ### 1. Clone the repository
 
 ```bash
@@ -87,9 +90,14 @@ pip install -r requirements.txt
 Create a `.env` file inside the `backend` folder and add your database settings:
 
 ```env
-MYSQL_URI=mysql://username:password@host:port/database_name
-admin email=admin@gmail.com
-admin password=admin1234
+MYSQL_URI = "Enter database url"
+JWT_SECRET_KEY =  "Enter your jwt secret key" 
+JWT_ALGORITHM= "algo"
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES= "time"  
+GEMINI_API_KEY = "enter your gemini key"
+PINECONE_API_KEY = "enter your pinecone api key"
+PINECONE_INDEX_NAME = "index name"
+
 ```
 
 Then start the backend:
@@ -120,9 +128,8 @@ The frontend will run at:
 http://localhost:5173
 ```
 
-## API Routes
+## Backend API Routes
 
-Base URL for local development:
 
 ```text
 http://localhost:8000
@@ -190,14 +197,6 @@ http://localhost:8000
   <img src="images/Screenshot 2026-10-02 002233.png" width="800" alt="ConnectX admin dashboard" />
   <img src="images/Screenshot 2026-10-02 002314.png" width="800" alt="ConnectX video call" />
 </div>
-
-## Authentication
-
-Protected API routes require a bearer token in the request header:
-
-```http
-Authorization: Bearer <your_access_token>
-```
 
 ## Notes
 
