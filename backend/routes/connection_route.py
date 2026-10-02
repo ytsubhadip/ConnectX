@@ -20,7 +20,7 @@ async def get_users(
 ):
     user_id = current_user.id
     user = db.query(User).filter(
-        User.id != user_id
+        and_(User.id != user_id, User.role == 'user')
     ).all()
 
     if not user:
