@@ -22,7 +22,7 @@ export default function () {
         }
 
         const userId = user.id;
-
+  
         if (!userId) {
             console.error("User ID not found");
             return;
