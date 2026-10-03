@@ -200,15 +200,9 @@ function DocumentChat() {
 
 
                     <div>
-
                         <h2>
                             Document Chat
                         </h2>
-
-                        <p>
-                            Document ID: {documentId}
-                        </p>
-
                     </div>
 
                 </div>

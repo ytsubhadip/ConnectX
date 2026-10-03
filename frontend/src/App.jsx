@@ -12,6 +12,7 @@ import DocumentChat from './pages/Document/DocumentChat';
 import Connections from './pages/Connections/Connections';
 import VideoCall from './pages/VideoCall/VideoCall';
 import ProtactRoute from './components/ProtectRoute/ProtactRoute';
+import CallNotification from './components/CallNotification/CallNotification';
 
 
 import AdminDashboard from './pages/Admin/AdminDashboard';
@@ -19,8 +20,12 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 
 function App() {
   return (
+  
 
     <BrowserRouter>
+
+    <CallNotification/>
+    
       <Routes>
 
         <Route path='/' element={<Home />} />
@@ -118,6 +123,8 @@ function App() {
 
 
     </BrowserRouter>
+    
+   
   )
 }
 

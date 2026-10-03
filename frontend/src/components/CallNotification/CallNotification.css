@@ -1,0 +1,68 @@
+
+.call-notification-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 15, 30, 0.65);
+  backdrop-filter: blur(5px);
+}
+
+.call-notification-card {
+  width: min(380px, calc(100% - 32px));
+  padding: 30px;
+  text-align: center;
+  background: #fff;
+  color: #172033;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.call-notification-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.call-notification-card h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+}
+
+.call-notification-card p {
+  color: #667085;
+  margin-bottom: 24px;
+}
+
+.call-notification-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.call-notification-actions button {
+  flex: 1;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.accept-call {
+  background: #16a34a;
+}
+
+.reject-call {
+  background: #dc2626;
+}
+
+.accept-call:hover {
+  background: #15803d;
+}
+
+.reject-call:hover {
+  background: #b91c1c;
+}
