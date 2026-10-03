@@ -10,10 +10,15 @@ from models.call_model import Call
 from utils.auth import get_current_user
 from database import get_db
 
+from utils.notification_manager import notification_manager
+
 router = APIRouter(
     prefix="/api/call",
     tags=["Video call"]
 )
+
+
+active_calls = {}
 
 # call start route
 @router.post("/start/{connection_id}")
@@ -33,7 +38,7 @@ async def start_call(
             detail="Connection not found"
         )
 
-    if connection.status != "accepted":
+    if str(connection.status) != "accepted":
         raise HTTPException(
             status_code=403,
             detail="You can only call an accepted connection"
@@ -49,12 +54,15 @@ async def start_call(
             detail="You are not authorized to start this call"
         )
 
+    # indentify the recipient
+
     if str(connection.sender_id) == str(current_user.id):
         receiver_id = connection.receiver_id
 
     else:
         receiver_id = connection.sender_id
-
+    
+    # create call record
     call = Call(
         caller_id=current_user.id,
         receiver_id=receiver_id,
@@ -66,7 +74,21 @@ async def start_call(
     db.commit()
     db.refresh(call)
 
+    # send incoming-call notification
+    try:
+        await notification_manager.notify(
+            str(receiver_id),{
+                "type":"incoming_call",
+                "call_id":str(call.id),
+                "caller_id" :str(current_user.id),
+                "caller_name": current_user.name
+            }
+        )
+    except:
+        pass
+
     return{
+        "message":"call started",
         "call_id":str(call.id),
         "caller_id":str(call.caller_id),
         "receiver_id": str(call.receiver_id)
@@ -100,11 +122,23 @@ async def end_call(
             detail="You are not part of this call"
         )
 
-    call.ended_at = datetime.now(timezone.utc)
+    if call.status == "completed":
+        return{
+            "message":"call already ended",
+            "duration": call.duration
+        }
+    
+    ended_at = datetime.now(timezone.utc)
+    setattr(call, "ended_at", ended_at)
 
     if call.started_at:
-        call.duration  = int(
-            (call.ended_at - call.started_at).total_seconds()
+        started_at = call.started_at
+
+        if started_at.tzinfo is None:
+            started_at = started_at.replace(tzinfo=timezone.utc)
+
+        call.duration = max(
+            0, int((ended_at - started_at).total_seconds()) 
         )
 
     call.status = "completed"
@@ -116,8 +150,8 @@ async def end_call(
         "duration":call.duration
     }
 
-active_calls = {}
 
+# webrtc signaling  
 @router.websocket("/ws/{call_id}")
 async def call_webscoket(
     webscoket: WebSocket,
@@ -138,16 +172,17 @@ async def call_webscoket(
             })
 
 
+
     try:
         while True:
-
             message = await webscoket.receive_json()
 
-            # send message to the other participant
-            for connection in active_calls[call_id]:
+
+             # Forward WebRTC signaling messages to the other participant
+            for connection in list(active_calls.get(call_id, [])):
 
                 if connection != webscoket:
-                    await connection.send_json(message)
+                    await connection.send_json(message) 
 
 
     except WebSocketDisconnect:
@@ -164,5 +199,23 @@ async def call_webscoket(
 
             if len(active_calls[call_id]) == 0:
                 del active_calls[call_id]
+
+
+@router.websocket("/notification/{user_id}")
+async def notification_websocket(
+    websocket:WebSocket,
+    user_id: str
+):
+    await notification_manager.connect(user_id, websocket)
+
+    try:
+        while True:
+            await websocket.receive_text()
+
+    except WebSocketDisconnect:
+        pass
+
+    finally:
+        notification_manager.disconnect(user_id)
 
 
