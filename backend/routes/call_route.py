@@ -18,9 +18,9 @@ router = APIRouter(
 # call start route
 @router.post("/start/{connection_id}")
 async def start_call(
-    connection_id:str,
-    current_user:User =Depends(get_current_user),
-    db:Session = Depends(get_db) 
+    connection_id: str,
+    current_user: User =Depends(get_current_user),
+    db: Session = Depends(get_db) 
 ):
 
     connection = db.query(Connection).filter(
@@ -59,7 +59,7 @@ async def start_call(
         caller_id=current_user.id,
         receiver_id=receiver_id,
         started_at=datetime.now(timezone.utc),
-        status = "started"
+        status = "ringing"
     )
 
     db.add(call)

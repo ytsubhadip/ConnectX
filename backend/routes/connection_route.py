@@ -23,6 +23,8 @@ async def get_users(
         and_(User.id != user_id, User.role == 'user')
     ).all()
 
+    
+
     if not user:
         raise HTTPException(
             status_code=400,

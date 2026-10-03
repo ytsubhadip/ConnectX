@@ -16,3 +16,4 @@ class Call(Base):
     duration = Column(Integer, default=0)  # seconds
 
     status = Column(String(20), default="started")
+    

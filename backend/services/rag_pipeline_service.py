@@ -3,6 +3,7 @@ import os
 from pinecone import Pinecone
 from google import genai
 from google.genai import errors
+from services.llm_api_service import groq_api, gemini_api
 
 from dotenv import load_dotenv
 
@@ -15,14 +16,6 @@ pc = Pinecone(
 )
 index_name = os.getenv("PINECONE_INDEX_NAME") or ""
 index = pc.index(index_name)
-
-
-# gemini setup
-
-gemini_client = genai.Client(
-    api_key = os.getenv("GEMINI_API_KEY")
-)
-
 
 
 # ask document function
@@ -94,12 +87,7 @@ def ask_document(
     """
     try:
 
-        response = gemini_client.models.generate_content(
-            model="gemini-3.8-flash",
-            contents=prompt
-        )
-
-        answer = response.text
+        answer = gemini_api(prompt)
 
         return{
                 "answer": answer,
@@ -107,11 +95,22 @@ def ask_document(
             }
 
     except errors.ServerError as e:
+        print("Unable to access the AI model server right now. Please try again later.")
+
+        # return{
+        #     "answer": "Unable to access the AI model server right now. Please try again later.",
+        #     "sources": []
+        # }
+
+
+    try:
+        answer =groq_api(prompt)
 
         return{
-            "answer": "Unable to access the AI model server right now. Please try again later.",
-            "sources": []
+            "answer": answer,
+            "sources" : chunks
         }
+        
 
     except Exception as e:
          return {
