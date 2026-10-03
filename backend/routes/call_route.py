@@ -1,3 +1,4 @@
+import logging
 from fastapi import APIRouter, status, HTTPException, Depends
 from fastapi import WebSocket, WebSocketDisconnect
 from datetime import datetime, timezone
@@ -18,6 +19,7 @@ router = APIRouter(
 )
 
 
+logger = logging.getLogger(__name__)
 active_calls = {}
 
 # call start route
@@ -75,17 +77,24 @@ async def start_call(
     db.refresh(call)
 
     # send incoming-call notification
-    try:
-        await notification_manager.notify(
-            str(receiver_id),{
-                "type":"incoming_call",
-                "call_id":str(call.id),
-                "caller_id" :str(current_user.id),
-                "caller_name": current_user.name
-            }
-        )
-    except:
-        pass
+   
+# Send incoming-call notification to the receiver
+    delivered = await notification_manager.notify(
+    str(receiver_id),
+    {
+        "type": "incoming_call",
+        "call_id": str(call.id),
+        "caller_id": str(current_user.id),
+        "caller_name": getattr(current_user, "name", "A user")
+    }
+)
+
+    if not delivered:
+         logger.warning(
+        "Call %s created, but live notification failed for user %s",
+        call.id,
+        receiver_id
+    )
 
     return{
         "message":"call started",
@@ -206,16 +215,22 @@ async def notification_websocket(
     websocket:WebSocket,
     user_id: str
 ):
-    await notification_manager.connect(user_id, websocket)
+    
 
     try:
+        await notification_manager.connect(user_id, websocket)
+
         while True:
             await websocket.receive_text()
 
     except WebSocketDisconnect:
         pass
 
+    except Exception:
+        logger.exception("Notification WebScoket failed for user=%s", user_id)
+        
+
     finally:
-        notification_manager.disconnect(user_id)
+        notification_manager.disconnect(user_id, websocket)
 
 

@@ -9,7 +9,7 @@ export default function () {
 
     useEffect(() => {
         const storeUser = localStorage.getItem("user");
- 
+
         if (!storeUser) return;
 
         let user;
@@ -22,90 +22,109 @@ export default function () {
         }
 
         const userId = user.id;
-  
+
         if (!userId) {
             console.error("User ID not found");
             return;
         }
 
-        // const wsBase = "ws://localhost:8000";
         const wsBase = "wss://connectx-bhpr.onrender.com";
-        const scoket = new WebSocket(`${wsBase}/api/call/notification/${userId}`
-        );
 
-        scoket.onopen = () => {
-            console.log("Call notification connected")
-        };
+        let socket;
+        let retryTimer;
+        let retryDelay = 1000;
+        let stopped = false;
 
-        scoket.onmessage = (event) => {
-            const data = JSON.parse(event.data);
+        const connect = () => {
+            if (stopped) return;
 
-            if (data.type === "incoming_call") {
-                setIncomingCall(data);
-            }
+            socket = new WebSocket(`${wsBase}/api/call/notification/${userId}`);
 
-            if (data.type === "call_ended") {
-                setIncomingCall((current) =>
-                    current?.call_id == data.call_id ? null : current
-                );
-            }
-        };
+            socket.onopen = () => {
+                console.log("Call notification connected");
+                retryDelay = 1000;
+            };
 
-        scoket.onerror = (error) => {
-            console.error("Notification Webscoket error:", error);
-        };
+            socket.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
 
+                    if (data.type === "incoming_call") {
+                        setIncomingCall(data);
+                    }
 
-        scoket.onclose = () => {
-            console.log("Call notification disconnected");
-        };
-
-        return () =>{
-            if(scoket.readyState === WebSocket.CONNECTING ||
-                scoket.readyState === WebSocket.OPEN){
-                    scoket.close();
+                    if (data.type === "call_ended") {
+                        setIncomingCall((current) =>
+                            current?.call_id === data.call_id ? null : current
+                        );
+                    }
+                } catch (error) {
+                    console.log("Invalid notification message", error);
                 }
+            };
+
+            socket.onerror = (error) => {
+                console.error("Notification websocket error", error);
+            };
+
+            socket.onclose = () => {
+                if (stopped) return;
+                console.log("Notification disconnected. Reconnecting...");
+
+                retryTimer = setTimeout(connect, retryDelay);
+                retryDelay = Math.min(retryDelay * 2, 30000);
+            };
         };
 
+        connect();
+
+        return () => {
+            stopped = true;
+            clearTimeout(retryTimer);
+
+            if (socket) {
+                socket.close();
+            }
+        };
     }, []);
 
     if (!incomingCall) return null;
 
-    const acceptCall = () => {
-        const callId = incomingCall.call_id;
+const acceptCall = () => {
+    const callId = incomingCall.call_id;
 
-        setIncomingCall(null);
+    setIncomingCall(null);
 
-        nevigate(`/video-call/${callId}`);
-    };
+    nevigate(`/video-call/${callId}`);
+};
 
-    const rejectCall = () => {
-        setIncomingCall(null);
-    }
+const rejectCall = () => {
+    setIncomingCall(null);
+}
 
-    return (
-        <div className="call-notification-overlay">
-            <div className="call-notification-card">
-                <div className="call-notification-icon">📹</div>
+return (
+    <div className="call-notification-overlay">
+        <div className="call-notification-card">
+            <div className="call-notification-icon">📹</div>
 
-                <h2>Incoming Video Call</h2>
+            <h2>Incoming Video Call</h2>
 
-                <p>
-                    <strong>{incomingCall.caller_name || "Someone"}</strong>
-                    {" "}is calling you.
-                </p>
+            <p>
+                <strong>{incomingCall.caller_name || "Someone"}</strong>
+                {" "}is calling you.
+            </p>
 
-                <div className="call-notification-actions">
-                    <button className="accept-call" onClick={acceptCall}>
-                        Accept
-                    </button>
+            <div className="call-notification-actions">
+                <button className="accept-call" onClick={acceptCall}>
+                    Accept
+                </button>
 
-                    <button className="reject-call" onClick={rejectCall}>
-                        Reject
-                    </button>
-                </div>
+                <button className="reject-call" onClick={rejectCall}>
+                    Reject
+                </button>
             </div>
         </div>
-    );
+    </div>
+);
 
 }
