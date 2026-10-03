@@ -331,8 +331,8 @@ function VideoCall() {
         // =================================================
 
         const wsBaseUrl =
-            import.meta.env.VITE_WS_BASE_URL ||
-            "ws://localhost:8000";
+            
+            "https://connectx-bhpr.onrender.com";
 
 
         const websocketUrl =
